@@ -263,5 +263,20 @@ def normalize(x, normalization_method, normalization_params):
 
     else:
         return x
+
+def unnormalized_data(data, normalization_method, normalization_params):
+        min_feature  = normalization_params[0]
+        max_feature  = normalization_params[1]
+        mean_feature = normalization_params[2]
+        std_feature  = normalization_params[3]
+        
+        if normalization_method == 'standardization':
+            return data * std_feature + mean_feature
+        elif normalization_method == 'minmax':
+            return data * (max_feature - min_feature) + min_feature
+        elif normalization_method == 'zmeanminmax':
+            return data * (max_feature - min_feature) + mean_feature
+        else:
+            return data
             
 
