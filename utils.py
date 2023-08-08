@@ -38,3 +38,24 @@ def create_grouped_bar_chart(data_dict1, data_dict2, title):
     plt.legend()
     plt.grid(axis='y')
     plt.show()
+
+def plot_clusters(kmeans, z_mean, cluster_centers):
+    # Plotting the cluster centers (centroids)
+#     cluster_centers = kmeans.cluster_centers_
+
+    # Get cluster assignments for each data point
+    cluster_assignments = kmeans.labels_
+
+    # Create a scatter plot of the data points, colored by cluster assignments
+    for cluster_id in np.unique(cluster_assignments):
+        plt.scatter(z_mean[cluster_assignments == cluster_id][:, 0], z_mean[cluster_assignments == cluster_id][:, 1], label=f'Cluster {cluster_id}')
+
+    # Scatter plot the cluster centers
+    plt.scatter(cluster_centers[:, 0], cluster_centers[:, 1], s=200, c='red', marker='X', label='Cluster Centers')
+
+    plt.xlabel('Feature 1')
+    plt.ylabel('Feature 2')
+    plt.title('K-Means Clustering')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
