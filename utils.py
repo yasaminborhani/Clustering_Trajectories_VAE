@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 def create_bar_chart(data_dict, title):
     categories = list(data_dict.keys())
