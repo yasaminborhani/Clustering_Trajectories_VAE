@@ -205,7 +205,7 @@ class DataGenerator(tf.keras.utils.Sequence):
 def parse_text(data):
     processed_data = tf.strings.split(data)[1:]
     processed_data = tf.strings.to_number(processed_data, tf.float32)
-    processed_data = tf.reshape(processed_data, (60,2))
+    processed_data = tf.reshape(processed_data, (60,5))
 
     return processed_data
 
