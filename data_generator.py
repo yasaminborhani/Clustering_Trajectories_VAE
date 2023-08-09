@@ -234,13 +234,13 @@ def param_extractor(dataset):
     max_feature = dataset.reduce(min_possible_value, lambda x, y: matrix_max(x, y))
 
     # mean feature
-    initial_sum = tf.constant([0.0, 0.0], shape=(1, 5), dtype=tf.float32)
+    initial_sum = tf.constant([0.0, 0.0, 0.0, 0.0, 0.0], shape=(1, 5), dtype=tf.float32)
     total_sum   = dataset.reduce(initial_sum, reduce_fn)
     num_samples = dataset.reduce(tf.constant(0), lambda acc, _: count_samples(acc, _))
     mean_feature = total_sum / tf.cast(num_samples * 60, tf.float32)
 
     # std feature
-    initial_square_sum = tf.constant([0.0, 0.0],shape=(1, 5),  dtype=tf.float32)
+    initial_square_sum = tf.constant([0.0, 0.0, 0.0, 0.0, 0.0],shape=(1, 5),  dtype=tf.float32)
     total_square_sum = dataset.reduce(initial_square_sum, reduce_square_sum)
     sdt_feature = tf.math.sqrt(total_square_sum / tf.cast(num_samples * 60, tf.float32) - (mean_feature)**2)
     
